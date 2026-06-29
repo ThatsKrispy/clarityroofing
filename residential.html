@@ -122,9 +122,67 @@
       .res-about-img img { height: 300px; }
       .res-feat-cards { grid-template-columns: 1fr; }
       .res-bottom-grid { grid-template-columns: 1fr; gap: 32px; }
+      .res-partner .container { grid-template-columns: 1fr; gap: 40px; }
+      .res-partner-img img { height: 300px; }
     }
     @media (max-width: 600px) {
       .res-feat-cards { grid-template-columns: 1fr; }
+      .res-newsletter-form { flex-direction: column; align-items: stretch; }
+    }
+
+    /* Your Ultimate Partner */
+    .res-partner { padding: var(--sec) 0; background: var(--white); }
+    .res-partner .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+    .res-partner-text h2 { color: var(--navy); font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 800; margin-bottom: 20px; line-height: 1.15; }
+    .res-partner-text p  { color: #555; font-size: 0.97rem; line-height: 1.75; }
+    .res-partner-img { overflow: hidden; border-radius: 4px; }
+    .res-partner-img img { width: 100%; height: 400px; object-fit: cover; object-position: center; }
+
+    /* Newsletter */
+    .res-newsletter {
+      background: var(--navy-dark);
+      padding: 72px 0;
+      text-align: center;
+    }
+    .res-newsletter h2 {
+      color: var(--white);
+      font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 32px;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .res-newsletter-form {
+      display: flex;
+      gap: 0;
+      max-width: 400px;
+      margin: 0 auto;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .res-newsletter-form input {
+      padding: 14px 18px;
+      border: none;
+      border-radius: var(--radius) var(--radius) 0 0;
+      font-size: 0.95rem;
+      font-family: var(--font);
+      outline: none;
+      width: 100%;
+      color: var(--body-txt);
+    }
+    .res-newsletter-form .btn {
+      border-radius: 0 0 var(--radius) var(--radius);
+      justify-content: center;
+      padding: 14px 28px;
+      font-size: 0.95rem;
+      gap: 8px;
     }
   </style>
 </head>
@@ -212,6 +270,37 @@
     </div>
   </section>
 
+  <!-- YOUR ULTIMATE PARTNER: text left, high-rise worker photo right -->
+  <section class="res-partner">
+    <div class="container">
+      <div class="res-partner-text fade-up">
+        <h2>Your Ultimate Partner</h2>
+        <p>At Clarity Roofing Solutions, we're dedicated to providing you with the best possible residential roofing experience. Our comprehensive range of services, expert team, quality materials, and commitment to customer satisfaction set us apart from the competition. Contact us today to discuss your residential roofing project and discover how we can help make your vision a reality.</p>
+        <a href="contact.html" class="btn btn-primary" style="margin-top:24px;">Discover more</a>
+      </div>
+      <div class="res-partner-img fade-up">
+        <img src="images/clarity-roofing-residential-roof-south-florida.webp"
+             alt="Clarity Roofing technician working on a high-rise rooftop overlooking the South Florida skyline"
+             width="560" height="400" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER SIGNUP -->
+  <section class="res-newsletter">
+    <div class="container">
+      <h2 class="fade-up">Signup our newsletter to get update<br>information, news, insight or promotions.</h2>
+      <form class="res-newsletter-form fade-up" id="newsletter-form" novalidate>
+        <label for="nl-email" class="sr-only">Email address</label>
+        <input id="nl-email" type="email" name="email" placeholder="Email" required autocomplete="email" />
+        <button type="submit" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Sign up
+        </button>
+      </form>
+    </div>
+  </section>
+
   <!-- CTA -->
   <section class="cta-band">
     <div class="container">
@@ -228,7 +317,31 @@
 
 </main>
 <div id="site-footer"></div>
+<style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
+
 <script src="main.js"></script>
-<script>renderHeader('residential'); renderFooter();</script>
+<script>
+  renderHeader('residential');
+  renderFooter();
+  // Newsletter form — basic email capture via Web3Forms
+  const nlForm = document.getElementById('newsletter-form');
+  if (nlForm) {
+    nlForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = nlForm.querySelector('button');
+      btn.textContent = 'Sending…'; btn.disabled = true;
+      const fd = new FormData(nlForm);
+      fd.append('access_key', 'REPLACE_WITH_WEB3FORMS_KEY');
+      fd.append('subject', 'Newsletter Signup — ClarityRoofingFL.com');
+      try {
+        const r = await fetch('https://api.web3forms.com/submit', { method:'POST', body:fd });
+        const j = await r.json();
+        btn.textContent = j.success ? '✓ Subscribed!' : 'Error — Try Again';
+        if (j.success) nlForm.reset();
+        else btn.disabled = false;
+      } catch { btn.textContent = 'Error — Try Again'; btn.disabled = false; }
+    });
+  }
+</script>
 </body>
 </html>
