@@ -383,7 +383,7 @@ p  { font-size: 0.97rem; }
 }
 .service-card:hover { box-shadow: 0 8px 32px rgba(27,43,91,0.12); transform: translateY(-2px); }
 .service-card-img { aspect-ratio: 4/3; overflow: hidden; position: relative; }
-.service-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
+.service-card-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.4s; }
 .service-card:hover .service-card-img img { transform: scale(1.04); }
 /* Grayscale on unhoverd, color on hover — matches original */
 .service-card-img img { filter: grayscale(30%); }
