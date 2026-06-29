@@ -2,84 +2,230 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Residential Roofing South Florida | Clarity Roofing — Repairs, Replacement & Metal</title>
-  <meta name="description" content="Expert residential roofing services across South Florida. Repairs, replacement, restoration, and metal roofing for homeowners. Free estimate — call Clarity Roofing 866.921.5205." />
+  <title>Residential Roofing South Florida | Clarity Roofing — Your Ultimate Partner</title>
+  <meta name="description" content="Expert residential roofing services across South Florida. Repairs, replacement, metal roofing, restoration, and emergency response. Your ultimate partner for residential roofing. Call 866.921.5205." />
   <link rel="canonical" href="https://clarityroofingfl.com/residential.html" />
   <link rel="icon" type="image/png" href="images/clarity-roofing-florida-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Residential-specific overrides ── */
+
+    /* Hero: centered text, no left-align breadcrumb */
+    .res-hero {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      padding: 80px 0 64px;
+      text-align: center;
+    }
+    .res-hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('images/clarity-roofing-commercial-roofing-services.webp');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.18;
+    }
+    .res-hero .container { position: relative; z-index: 2; }
+    .res-hero h1 {
+      color: var(--white);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      text-transform: none;
+    }
+    .res-hero p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.05rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* About: image LEFT, text RIGHT — matches live WP layout */
+    .res-about { padding: var(--sec) 0; background: var(--white); }
+    .res-about .container {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .res-about-img { overflow: hidden; }
+    .res-about-img img { width: 100%; height: 380px; object-fit: cover; object-position: center top; }
+    .res-about-text {}
+    .res-about-text h2 { color: var(--navy); font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 20px; line-height: 1.2; }
+    .res-about-text p { color: #555; font-size: 0.97rem; line-height: 1.75; margin-bottom: 14px; }
+
+    /* Comprehensive services dark section */
+    .res-services-dark {
+      background: var(--navy);
+      position: relative;
+      overflow: hidden;
+      padding: 72px 0 0;
+    }
+    .res-services-dark-bg {
+      position: absolute; inset: 0;
+      background-image: url('images/clarity-roofing-commercial-roofing-services.webp');
+      background-size: cover;
+      background-position: center bottom;
+      opacity: 0.2;
+    }
+    .res-services-dark .container { position: relative; z-index: 2; }
+    .res-services-dark-hd {
+      text-align: center;
+      padding-bottom: 56px;
+    }
+    .res-services-dark-hd h2 { color: var(--white); font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 12px; }
+    .res-services-dark-hd p  { color: rgba(255,255,255,0.7); font-size: 0.97rem; max-width: 560px; margin: 0 auto; }
+
+    /* 3 white feature cards floating over dark bg */
+    .res-feat-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+    .res-feat-card {
+      background: var(--white);
+      padding: 40px 28px;
+      text-align: center;
+      border-radius: var(--radius);
+    }
+    .res-feat-icon {
+      width: 56px; height: 56px;
+      margin: 0 auto 20px;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid var(--navy);
+      border-radius: 50%;
+    }
+    .res-feat-icon svg { width: 26px; height: 26px; color: var(--navy); }
+    .res-feat-card h3 { color: var(--gold); font-size: 1.05rem; font-weight: 700; margin-bottom: 14px; text-transform: none; letter-spacing: 0; }
+    .res-feat-card p  { color: #555; font-size: 0.875rem; line-height: 1.7; }
+
+    /* Bottom 3-col navy text section */
+    .res-bottom {
+      background: var(--navy);
+      padding: 56px 0;
+    }
+    .res-bottom-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+    }
+    .res-bottom-col h4 { color: var(--gold); font-size: 0.9rem; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 14px; font-style: italic; }
+    .res-bottom-col p  { color: rgba(255,255,255,0.65); font-size: 0.875rem; line-height: 1.7; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .res-about .container { grid-template-columns: 1fr; gap: 40px; }
+      .res-about-img img { height: 300px; }
+      .res-feat-cards { grid-template-columns: 1fr; }
+      .res-bottom-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 600px) {
+      .res-feat-cards { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 <div id="site-header"></div>
 <main>
-  <section class="page-hero">
-    <div class="page-hero-bg" style="background-image:url('images/clarity-roofing-residential-reroof-florida.webp')"></div>
+
+  <!-- HERO: centered, "Residential" large bold, subtitle below -->
+  <section class="res-hero">
+    <div class="res-hero-bg" role="presentation"></div>
     <div class="container">
-      <nav class="breadcrumb"><a href="index.html">Home</a> › <span>Residential</span></nav>
-      <span class="eyebrow">Your Ultimate Partner for Residential Roofing</span>
-      <h1>Residential<br>Roofing South Florida</h1>
-      <p>Experience unmatched quality, service, and value — from repairs and replacements to metal roofing and restoration for South Florida homeowners.</p>
+      <h1>Residential</h1>
+      <p>Your Ultimate Partner for Residential Roofing Projects</p>
     </div>
   </section>
 
-  <section class="section about-strip">
+  <!-- ABOUT: image left (female owner + crew), text right -->
+  <section class="res-about">
     <div class="container">
-      <div class="about-text fade-up">
-        <span class="eyebrow">Why Homeowners Choose Clarity</span>
+      <div class="res-about-img fade-up">
+        <!-- female owner selfie with tile crew in bg — matches live WP photo -->
+        <img src="images/clarity-roofing-commercial-flat-roof-inspection.webp"
+             alt="Clarity Roofing owner with crew performing a residential tile roof replacement in South Florida"
+             width="420" height="380" loading="lazy" />
+      </div>
+      <div class="res-about-text fade-up">
         <h2>Experience Unmatched Quality, Service, and Value</h2>
         <p>At Clarity Roofing Solutions, we understand the importance of a strong, durable, and visually appealing roof for your home. As a leading provider of residential roofing services, we pride ourselves on our commitment to delivering the highest quality workmanship, materials, and customer service.</p>
-        <p>Whether you're looking to install a new roof, repair an existing one, or undertake routine maintenance, our team of skilled professionals is here to help you every step of the way. Competitive pricing, comprehensive warranty, and fully insured — your peace of mind is guaranteed.</p>
-        <a href="contact.html" class="btn btn-primary" style="margin-top:8px;">Get a Free Estimate</a>
-      </div>
-      <div class="about-image fade-up">
-        <img src="images/clarity-roofing-residential-roof-south-florida.webp" alt="Clarity Roofing residential roof South Florida" width="600" height="420" loading="lazy" />
+        <p>Whether you're looking to install a new roof, repair an existing one, or undertake routine maintenance, our team of skilled professionals is here to help you every step of the way.</p>
       </div>
     </div>
   </section>
 
-  <section class="section services-section bg-off">
+  <!-- COMPREHENSIVE RANGE — dark navy + bg overlay + 3 white cards -->
+  <section class="res-services-dark">
+    <div class="res-services-dark-bg" role="presentation"></div>
     <div class="container">
-      <span class="section-label">Residential Services</span>
-      <h2>Comprehensive Range of Services</h2>
-      <div class="services-grid">
-        <a class="service-card" href="services/roof-repair-waterproofing.html">
-          <div class="service-card-img"><img src="images/clarity-roofing-roof-repair-waterproofing.webp" alt="Residential roof repair South Florida" loading="lazy" /></div>
-          <div class="service-card-body"><h3>Roof Repairs</h3><p>Leaks, missing shingles, damaged flashing — we respond fast and fix it right the first time.</p><span class="btn btn-primary">Learn more</span></div>
-        </a>
-        <a class="service-card" href="services/roof-replacement.html">
-          <div class="service-card-img"><img src="images/clarity-roofing-residential-reroof-florida.webp" alt="Residential roof replacement Florida" loading="lazy" /></div>
-          <div class="service-card-body"><h3>Roof Replacement</h3><p>Full replacement handled from material selection to installation and final cleanup.</p><span class="btn btn-primary">Learn more</span></div>
-        </a>
-        <a class="service-card" href="services/metal-roofing.html">
-          <div class="service-card-img"><img src="images/clarity-roofing-metal-roof-installation-florida.webp" alt="Residential metal roofing Florida" loading="lazy" /></div>
-          <div class="service-card-body"><h3>Metal Roofing</h3><p>Energy-efficient, hurricane-resistant metal roofing that adds curb appeal and lasting value to your home.</p><span class="btn btn-primary">Learn more</span></div>
-        </a>
-        <a class="service-card" href="services/roof-restoration-coating.html">
-          <div class="service-card-img"><img src="images/clarity-roofing-roof-restoration-coating-florida.webp" alt="Residential roof restoration" loading="lazy" /></div>
-          <div class="service-card-body"><h3>Restoration &amp; Coating</h3><p>Extend your roof's life significantly at a fraction of full replacement cost.</p><span class="btn btn-primary">Learn more</span></div>
-        </a>
-        <a class="service-card" href="services/emergency-response.html">
-          <div class="service-card-img"><img src="images/clarity-roofing-emergency-roof-repair-florida.webp" alt="Emergency roof repair residential Florida" loading="lazy" /></div>
-          <div class="service-card-body"><h3>Emergency Response</h3><p>Storm damage? Active leak? We respond 24/7 to protect your home and assist with insurance.</p><span class="btn btn-primary">Learn more</span></div>
-        </a>
-        <a class="service-card" href="contact.html">
-          <div class="service-card-img"><img src="images/clarity-roofing-owner-job-site-south-florida.webp" alt="Clarity Roofing consultation" loading="lazy" /></div>
-          <div class="service-card-body"><h3>Free Consultation</h3><p>Not sure what your roof needs? Our team will assess the situation and give you an honest recommendation — no obligation.</p><span class="btn btn-primary">Schedule Now</span></div>
-        </a>
+      <div class="res-services-dark-hd fade-up">
+        <h2>Comprehensive Range of Services</h2>
+        <p>Our wide array of residential roofing services is designed to cater to all your roofing needs.</p>
+      </div>
+      <div class="res-feat-cards fade-up">
+        <div class="res-feat-card">
+          <div class="res-feat-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>Expertise and Experience</h3>
+          <p>Our team of skilled professionals brings years of experience and in-depth knowledge of the roofing industry to every project. We stay up-to-date on the latest techniques, materials, and technologies, ensuring your roofing project is completed to the highest standards.</p>
+        </div>
+        <div class="res-feat-card">
+          <div class="res-feat-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          </div>
+          <h3>Quality Materials</h3>
+          <p>We believe in using only the best materials for your roofing project, sourced from reputable manufacturers. This ensures your roof's durability, longevity, and weather resistance, giving you peace of mind and protecting your investment.</p>
+        </div>
+        <div class="res-feat-card">
+          <div class="res-feat-icon" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3>Customized Solutions</h3>
+          <p>Every home is unique, which is why we offer personalized roofing solutions to meet your specific needs and preferences. From traditional asphalt shingles to modern metal roofing systems, we'll help you choose the ideal materials and design to suit your home's style and your budget.</p>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- BOTTOM 3 TEXT COLUMNS on navy bg -->
+  <section class="res-bottom">
+    <div class="container">
+      <div class="res-bottom-grid fade-up">
+        <div class="res-bottom-col">
+          <h4>Exceptional Customer Service</h4>
+          <p>At Clarity Roofing Solutions, customer satisfaction is our top priority. From the initial consultation to the final cleanup, our team is dedicated to providing clear communication, professional service, and a seamless experience throughout your roofing project.</p>
+        </div>
+        <div class="res-bottom-col">
+          <h4>Competitive Pricing</h4>
+          <p>We understand that a roofing project can be a significant investment, which is why we strive to provide competitive pricing without compromising on quality or service. Our transparent pricing structure ensures you know exactly what you're paying for and that there are no hidden costs or surprises.</p>
+        </div>
+        <div class="res-bottom-col">
+          <h4>Warranty and Insurance</h4>
+          <p>Your peace of mind is important to us. That's why we back our work with a comprehensive warranty and are fully insured to protect you and your property during the course of your roofing project.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
   <section class="cta-band">
     <div class="container">
-      <div class="cta-band-text"><h2>Let's protect your home</h2><p>Free estimates, honest advice, quality work. Call or reach out today.</p></div>
+      <div class="cta-band-text">
+        <h2>Let's protect your home</h2>
+        <p>Free estimates, honest advice, quality work. Call or reach out today.</p>
+      </div>
       <div class="cta-band-actions">
         <a href="contact.html" class="btn btn-white">Free Estimate</a>
         <a href="tel:8669215205" class="btn btn-primary" style="background:var(--navy);">Call 866.921.5205</a>
       </div>
     </div>
   </section>
+
 </main>
 <div id="site-footer"></div>
 <script src="main.js"></script>
