@@ -1,6 +1,16 @@
 // Clarity Roofing Florida — clarityroofingfl.com
 // Shared components: header, footer, form, scroll animations
 
+// ── ADA / Accessibility Widget (UserWay) ──
+// Replace YOUR_USERWAY_ACCOUNT_ID with the real key from userway.org
+(function(d) {
+  var s = d.createElement('script');
+  s.setAttribute('data-account', 'YOUR_USERWAY_ACCOUNT_ID');
+  s.setAttribute('src', 'https://cdn.userway.org/widget.js');
+  s.async = true;
+  (d.body || d.head).appendChild(s);
+})(document);
+
 const PHONE      = '866.921.5205';
 const PHONE_HREF = 'tel:8669215205';
 const EMAIL      = 'info@ClarityRoofingFL.com';
