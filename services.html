@@ -59,9 +59,56 @@
   <section class="save-strip">
     <div class="save-strip-bg"></div>
     <div class="container fade-up">
-      <h2>Professional, on time, every time!</h2>
-      <p style="color:rgba(255,255,255,0.75);max-width:560px;margin-bottom:32px;">We understand that when it comes to your business, you can't afford to have any delays. That's why we work quickly and efficiently to get the job done right the first time.</p>
-      <a href="about.html" class="btn btn-gold">Discover More</a>
+      <h2>We can save you money on your next roofing project</h2>
+      <p style="color:rgba(255,255,255,0.78);max-width:620px;margin-bottom:32px;">Clarity Roofing is honored to be considered an extension of our clients' team, and our shoulder-to-shoulder approach ensures successful completion of every project, each and every time.</p>
+      <div class="save-feats">
+        <div class="save-feat"><h4>Professional Experts</h4><p>Proudly serving South Florida since 2005 from Deerfield Beach — a woman and minority-owned, full-service roofing contractor with unwavering dedication to client care.</p></div>
+        <div class="save-feat"><h4>Certified Team</h4><p>Experienced roofers delivering quality workmanship and high-grade materials, with competitive prices and flexible financing options.</p></div>
+        <div class="save-feat"><h4>On Time</h4><p>We know how important it is to get your roof completed promptly and efficiently — done right the first time and on time.</p></div>
+        <div class="save-feat"><h4>24/7 Premium Support</h4><p>Our team is here to answer your call and provide professional advice or support whenever you need it — day or night.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq-section">
+    <div class="container">
+      <div class="faq-list fade-up">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-divider"></div>
+        <details>
+          <summary>- How often should I inspect and maintain my roof?</summary>
+          <div class="faq-body"><p>The general rule of thumb is to inspect and maintain your roof at least once a year. Depending on the type of roof you have, its age, and where you live, you may want to check more frequently. In South Florida's climate, it's important to check for any damage after a storm or heavy winds, and any time you notice changes such as cracked or missing shingles.</p></div>
+        </details>
+        <details>
+          <summary>- What are the benefits of having a new roof installed?</summary>
+          <div class="faq-body"><p>A newly installed roof is more energy efficient, helping reduce heating and cooling costs. It increases curb appeal and property value, is less prone to damage from weather and pests, and provides stable protection for your family and possessions.</p></div>
+        </details>
+        <details>
+          <summary>- What type of material is best for my roof?</summary>
+          <div class="faq-body"><p>For commercial properties, metal is often the ideal choice — durable, weather-resistant, lightweight, and long-lasting. For residential properties, options range from asphalt shingles to metal and tile depending on budget and aesthetics. Our team will assess your property and recommend the best solution.</p></div>
+        </details>
+        <details>
+          <summary>- How long will the average job take to complete?</summary>
+          <div class="faq-body"><p>A commercial roofing job can take anywhere from several days to several weeks depending on the complexity, size, and type of roof, as well as weather conditions. Our project management team communicates timeline updates throughout so you're never left guessing.</p></div>
+        </details>
+      </div>
+      <div class="faq-contact-box fade-up">
+        <small>Need help?</small>
+        <h3>Don't hesitate to<br>contact us</h3>
+        <a href="tel:8669215205" class="btn btn-primary">Call us</a>
+        <div class="faq-divider-sm"></div>
+        <h4>Send us a message</h4>
+        <form id="faq-form" class="contact-mini-form" novalidate>
+          <label for="faq-name" class="sr-only">Name</label>
+          <input id="faq-name" type="text" name="name" placeholder="Name" required autocomplete="name" />
+          <label for="faq-email" class="sr-only">Email</label>
+          <input id="faq-email" type="email" name="email" placeholder="Email" required autocomplete="email" />
+          <label for="faq-msg" class="sr-only">Message</label>
+          <input id="faq-msg" type="text" name="message" placeholder="Message" required />
+          <button type="submit" class="btn btn-primary form-submit" style="justify-content:center;">Send</button>
+        </form>
+      </div>
     </div>
   </section>
 
@@ -76,7 +123,8 @@
   </section>
 </main>
 <div id="site-footer"></div>
+<style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
 <script src="main.js"></script>
-<script>renderHeader('services'); renderFooter();</script>
+<script>renderHeader('services'); renderFooter(); initContactForm('faq-form');</script>
 </body>
 </html>

@@ -68,7 +68,13 @@ function renderHeader(activePage = '') {
               </ul>
             </li>
             <li><a href="residential.html" ${activePage==='residential'?'class="active"':''}>Residential</a></li>
-            <li><a href="gallery.html" ${activePage==='gallery'?'class="active"':''}>Clarity College</a></li>
+            <li class="has-dropdown">
+              <a href="gallery.html" ${activePage==='gallery'||activePage==='news'?'class="active"':''}>Clarity College</a>
+              <ul class="dropdown">
+                <li><a href="gallery.html">Clarity College</a></li>
+                <li><a href="news.html">News</a></li>
+              </ul>
+            </li>
             <li><a href="contact.html" ${activePage==='contact'?'class="active"':''}>Contact Us</a></li>
           </ul>
         </nav>
@@ -84,6 +90,7 @@ function renderHeader(activePage = '') {
         <div class="sub">${SERVICES.map(s=>`<a href="${s.href}">${s.label}</a>`).join('')}</div>
         <a href="residential.html">Residential</a>
         <a href="gallery.html">Clarity College</a>
+        <div class="sub"><a href="news.html">News</a></div>
         <a href="contact.html">Contact Us</a>
         <a class="m-cta" href="${PHONE_HREF}">${PHONE}</a>
       </nav>
