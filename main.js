@@ -55,7 +55,7 @@ function renderHeader(activePage = '') {
     <header class="site-header">
       <div class="container">
         <a class="site-logo" href="index.html" aria-label="Clarity Roofing Home">
-          <img src="images/clarity-roofing-florida-logo.png" alt="Clarity Roofing Florida Logo" />
+          <img src="images/clarity-roofing-logo-nav.png" alt="Clarity Roofing Florida Logo" width="165" height="49" />
         </a>
         <nav aria-label="Main navigation">
           <ul class="site-nav">
@@ -112,7 +112,7 @@ function renderFooter() {
       <div class="container">
         <div class="footer-grid">
           <div class="footer-brand">
-            <img class="footer-brand-logo" src="images/clarity-roofing-florida-logo.png" alt="Clarity Roofing Florida" />
+            <img class="footer-brand-logo" src="images/clarity-roofing-logo-white.png" alt="Clarity Roofing Florida" width="165" height="49" />
             <p>Clarity Roofing Solutions is dedicated to partnering with you through education and exceptional service — it's a two-way street!</p>
             <div class="footer-social">
               <a class="social-btn" href="https://www.facebook.com/ClarityRoofingFL/" target="_blank" rel="noopener" aria-label="Facebook">${ICONS.fb}</a>
