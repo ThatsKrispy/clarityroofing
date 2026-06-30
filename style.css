@@ -1,7 +1,7 @@
 /* ============================================================
    Clarity Roofing Florida — clarityroofingfl.com
    Static site CSS — faithful port of WordPress/Elementor design
-   Colors: Navy #1B2B5B, Gold/Orange accent #E8931D, White
+   Colors: Navy #1B2B5B, Bright Blue accent #2F6FED, White (brand: white / blue / black)
    Font: Inter (matches original)
    ============================================================ */
 
@@ -9,8 +9,8 @@
   --navy:      #1B2B5B;
   --navy-dark: #141f45;
   --navy-mid:  #233270;
-  --gold:      #E8931D;
-  --gold-lt:   #f5a83c;
+  --gold:      #2F6FED;
+  --gold-lt:   #5A8FF5;
   --white:     #ffffff;
   --off-white: #f5f7fb;
   --gray-lt:   #e8ecf4;
