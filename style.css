@@ -707,6 +707,14 @@ details .faq-body { padding: 16px 20px 20px; font-size: 0.91rem; color: #555; li
 .service-body h2 { color: var(--navy); margin-bottom: 16px; }
 .service-body h3 { color: var(--navy); margin: 28px 0 10px; font-size: 1.1rem; }
 .service-body p  { color: #555; margin-bottom: 14px; font-size: 0.95rem; line-height: 1.75; }
+.service-body .service-figure {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  margin: 6px 0 26px;
+  box-shadow: 0 10px 30px rgba(27,43,91,0.12);
+}
 .service-body ul { margin: 12px 0 20px; }
 .service-body ul li {
   padding: 9px 0 9px 24px;
