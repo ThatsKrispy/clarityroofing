@@ -330,30 +330,16 @@
 <script>
   renderHeader('residential');
   renderFooter();
-  // Newsletter form — basic email capture via Web3Forms
+  // Newsletter form — opens the visitor's email client pre-filled
   const nlForm = document.getElementById('newsletter-form');
   if (nlForm) {
-    nlForm.addEventListener('submit', async (e) => {
+    nlForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const btn = nlForm.querySelector('button');
-      if (!KEY_IS_SET) {
-        const orig = btn.innerHTML;
-        mailtoFallback(nlForm, 'Newsletter Signup — ClarityRoofingFL.com');
-        btn.textContent = 'Opening your email app…';
-        setTimeout(() => { btn.innerHTML = orig; }, 4000);
-        return;
-      }
-      btn.textContent = 'Sending…'; btn.disabled = true;
-      const fd = new FormData(nlForm);
-      fd.append('access_key', WEB3FORMS_KEY);
-      fd.append('subject', 'Newsletter Signup — ClarityRoofingFL.com');
-      try {
-        const r = await fetch('https://api.web3forms.com/submit', { method:'POST', body:fd });
-        const j = await r.json();
-        btn.textContent = j.success ? '✓ Subscribed!' : 'Error — Try Again';
-        if (j.success) nlForm.reset();
-        else btn.disabled = false;
-      } catch { btn.textContent = 'Error — Try Again'; btn.disabled = false; }
+      const orig = btn.innerHTML;
+      mailtoCompose(nlForm, 'Newsletter Signup — ClarityRoofingFL.com');
+      btn.textContent = 'Opening your email app…';
+      setTimeout(() => { btn.innerHTML = orig; }, 4000);
     });
   }
 </script>

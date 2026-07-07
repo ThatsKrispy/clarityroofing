@@ -128,14 +128,9 @@ const EMAIL      = 'info@ClarityRoofingFL.com';
 const EMAIL_HREF = 'mailto:info@ClarityRoofingFL.com';
 const ADDRESS    = '1625 SW 1st Way, Bay C15A<br>Deerfield Beach, FL 33441';
 
-// Web3Forms access key — paste the real key here (one place, used by every form
-// on the site). Until it's set, forms fall back to opening the visitor's email
-// app pre-filled with their message, so no lead is ever lost.
-const WEB3FORMS_KEY = 'REPLACE_WITH_WEB3FORMS_KEY';
-const KEY_IS_SET = !WEB3FORMS_KEY.startsWith('REPLACE');
-
-// Compose a mailto: from a form's fields (fallback path while no key is set)
-function mailtoFallback(form, defaultSubject) {
+// Forms submit via the visitor's own email client (mailto:) — no third-party
+// form service. Compose a pre-filled email from a form's fields.
+function mailtoCompose(form, defaultSubject) {
   const fd = new FormData(form);
   const subject = fd.get('subject') || defaultSubject || 'Website Inquiry — ClarityRoofingFL.com';
   const lines = [];
@@ -283,35 +278,17 @@ function renderFooter() {
     </footer>`;
 }
 
-// Web3Forms contact form
+// Contact form — opens the visitor's email client pre-filled with their message
 function initContactForm(formId) {
   const form = document.getElementById(formId);
   if (!form) return;
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
     const btn = form.querySelector('.form-submit');
-    if (!KEY_IS_SET) {
-      const orig = btn.textContent;
-      mailtoFallback(form);
-      btn.textContent = 'Opening your email app…';
-      setTimeout(() => { btn.textContent = orig; }, 4000);
-      return;
-    }
-    btn.textContent = 'Sending…'; btn.disabled = true;
-    const fd = new FormData(form);
-    fd.append('access_key', WEB3FORMS_KEY);
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
-      const json = await res.json();
-      if (json.success) {
-        form.reset();
-        const s = document.getElementById('form-success');
-        if (s) s.style.display = 'block';
-        btn.textContent = 'Message Sent!';
-      } else {
-        btn.textContent = 'Error — Try Again'; btn.disabled = false;
-      }
-    } catch { btn.textContent = 'Error — Try Again'; btn.disabled = false; }
+    const orig = btn.textContent;
+    mailtoCompose(form);
+    btn.textContent = 'Opening your email app…';
+    setTimeout(() => { btn.textContent = orig; }, 4000);
   });
 }
 
