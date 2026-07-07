@@ -128,6 +128,21 @@ const EMAIL      = 'info@ClarityRoofingFL.com';
 const EMAIL_HREF = 'mailto:info@ClarityRoofingFL.com';
 const ADDRESS    = '1625 SW 1st Way, Bay C15A<br>Deerfield Beach, FL 33441';
 
+// Web3Forms access key — paste the real key here (one place, used by every form
+// on the site). Until it's set, forms fall back to opening the visitor's email
+// app pre-filled with their message, so no lead is ever lost.
+const WEB3FORMS_KEY = 'REPLACE_WITH_WEB3FORMS_KEY';
+const KEY_IS_SET = !WEB3FORMS_KEY.startsWith('REPLACE');
+
+// Compose a mailto: from a form's fields (fallback path while no key is set)
+function mailtoFallback(form, defaultSubject) {
+  const fd = new FormData(form);
+  const subject = fd.get('subject') || defaultSubject || 'Website Inquiry — ClarityRoofingFL.com';
+  const lines = [];
+  fd.forEach((v, k) => { if (k !== 'subject' && String(v).trim()) lines.push(`${k[0].toUpperCase()}${k.slice(1)}: ${v}`); });
+  window.location.href = `${EMAIL_HREF}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+}
+
 const SERVICES = [
   { label: 'Metal Roofing',                href: 'services/metal-roofing.html' },
   { label: 'Roof Repair & Waterproofing',  href: 'services/roof-repair-waterproofing.html' },
@@ -275,9 +290,16 @@ function initContactForm(formId) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = form.querySelector('.form-submit');
+    if (!KEY_IS_SET) {
+      const orig = btn.textContent;
+      mailtoFallback(form);
+      btn.textContent = 'Opening your email app…';
+      setTimeout(() => { btn.textContent = orig; }, 4000);
+      return;
+    }
     btn.textContent = 'Sending…'; btn.disabled = true;
     const fd = new FormData(form);
-    fd.append('access_key', 'REPLACE_WITH_WEB3FORMS_KEY');
+    fd.append('access_key', WEB3FORMS_KEY);
     try {
       const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
       const json = await res.json();

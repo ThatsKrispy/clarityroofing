@@ -671,6 +671,15 @@ details .faq-body { padding: 16px 20px 20px; font-size: 0.91rem; color: #555; li
 .form-group textarea { resize: vertical; min-height: 120px; }
 .form-submit { width: 100%; padding: 14px; font-size: 0.95rem; margin-top: 6px; }
 .form-success { display: none; padding: 14px; background: #e8f5e9; border-radius: var(--radius); color: #2e7d32; font-size: 0.88rem; margin-top: 10px; }
+.form-alt { font-size: 0.85rem; color: var(--gray); text-align: center; margin-top: 12px; }
+.form-alt a { color: var(--navy); font-weight: 600; white-space: nowrap; }
+
+/* ── Legal pages (privacy, terms) ── */
+.legal-body { max-width: 800px; }
+.legal-body h2 { font-size: 1.25rem; color: var(--navy); margin: 32px 0 10px; }
+.legal-body p, .legal-body li { color: var(--body-txt); line-height: 1.7; margin-bottom: 12px; }
+.legal-body ul { padding-left: 22px; margin-bottom: 12px; list-style: disc; }
+.legal-body a { color: var(--gold); font-weight: 600; }
 
 /* ── Page Hero (inner pages) ── */
 .page-hero {

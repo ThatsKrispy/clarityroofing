@@ -5,6 +5,13 @@
   <title>Residential Roofing South Florida | Clarity Roofing — Your Ultimate Partner</title>
   <meta name="description" content="Expert residential roofing services across South Florida. Repairs, replacement, metal roofing, restoration, and emergency response. Your ultimate partner for residential roofing. Call 866.921.5205." />
   <link rel="canonical" href="https://clarityroofingfl.com/residential.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Clarity Roofing Solutions" />
+  <meta property="og:title" content="Residential Roofing South Florida | Clarity Roofing — Your Ultimate Partner" />
+  <meta property="og:description" content="Expert residential roofing services across South Florida. Repairs, replacement, metal roofing, restoration, and emergency response. Your ultimate partner for residential roofing. Call 866.921.5205." />
+  <meta property="og:url" content="https://clarityroofingfl.com/residential.html" />
+  <meta property="og:image" content="https://clarityroofingfl.com/images/clarity-roofing-commercial-flat-roof-inspection.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="icon" type="image/png" href="images/clarity-roofing-florida-logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -329,9 +336,16 @@
     nlForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = nlForm.querySelector('button');
+      if (!KEY_IS_SET) {
+        const orig = btn.innerHTML;
+        mailtoFallback(nlForm, 'Newsletter Signup — ClarityRoofingFL.com');
+        btn.textContent = 'Opening your email app…';
+        setTimeout(() => { btn.innerHTML = orig; }, 4000);
+        return;
+      }
       btn.textContent = 'Sending…'; btn.disabled = true;
       const fd = new FormData(nlForm);
-      fd.append('access_key', 'REPLACE_WITH_WEB3FORMS_KEY');
+      fd.append('access_key', WEB3FORMS_KEY);
       fd.append('subject', 'Newsletter Signup — ClarityRoofingFL.com');
       try {
         const r = await fetch('https://api.web3forms.com/submit', { method:'POST', body:fd });
