@@ -155,24 +155,17 @@ const ICONS = {
   phone: icon('<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.69h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.35a16 16 0 0 0 5.72 5.72l1.62-.63a2 2 0 0 1 2.11.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.05z"/>'),
   mail:  icon('<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>'),
   pin:   icon('<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>'),
-  fb:    icon('<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>', 16),
-  ig:    icon('<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>', 16),
-  li:    icon('<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>', 16),
+  fb:    icon('<path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>', 18),
+  ig:    icon('<rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>', 18),
+  tw:    icon('<path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>', 18),
+  li:    icon('<path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>', 18),
   check: icon('<polyline points="20 6 9 17 4 12"/>'),
 };
 
+// ── Header — live layout: white bar, logo | menu | phone button (no topbar) ──
 function renderHeader(activePage = '') {
   const isService = activePage.startsWith('svc-');
   document.getElementById('site-header').innerHTML = `
-    <div class="topbar">
-      <div class="container">
-        <span>Serving South Florida Since 2005 · Woman &amp; Minority-Owned Business</span>
-        <div class="topbar-right">
-          <a href="${EMAIL_HREF}">${EMAIL}</a>
-          <a href="${PHONE_HREF}"><strong>${PHONE}</strong></a>
-        </div>
-      </div>
-    </div>
     <header class="site-header">
       <div class="container">
         <a class="site-logo" href="index.html" aria-label="Clarity Roofing Home">
@@ -226,56 +219,73 @@ function renderHeader(activePage = '') {
   });
 }
 
+// ── Footer — live layout: one gradient section (pattern bottom-right) holding
+//    newsletter → brand/services/get-in-touch → copyright ──
 function renderFooter() {
   const yr = new Date().getFullYear();
   document.getElementById('site-footer').innerHTML = `
     <footer class="site-footer">
       <div class="container">
+        <div class="footer-newsletter">
+          <h3>Signup our newsletter to get update information, news, insight or promotions.</h3>
+          <form id="newsletter-form" class="newsletter-form" novalidate>
+            <input type="hidden" name="subject" value="Newsletter Signup — ClarityRoofingFL.com" />
+            <label for="nl-email" class="sr-only">Email</label>
+            <input id="nl-email" type="email" name="email" placeholder="Email" required autocomplete="email" />
+            <button type="submit" class="btn btn-primary">Sign up</button>
+          </form>
+        </div>
         <div class="footer-grid">
           <div class="footer-brand">
             <img class="footer-brand-logo" src="images/clarity-roofing-logo-white.png" alt="Clarity Roofing Florida" width="165" height="49" />
-            <p>Clarity Roofing Solutions is dedicated to partnering with you through education and exceptional service — it's a two-way street!</p>
+            <p>Clarity Roofing Solutions is dedicated to partnering with you through education and it's a two-way street!</p>
+          </div>
+          <div class="footer-col">
+            <h4>Services</h4>
+            <ul>
+              ${SERVICES.map(s=>`<li><a href="${s.href}">${s.label}</a></li>`).join('')}
+              <li><a href="contact.html">Consultation</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Get in touch</h4>
+            <div class="footer-contact-info">
+              <div class="f-contact">${ICONS.mail}<a href="${EMAIL_HREF}">${EMAIL}</a></div>
+              <div class="f-contact">${ICONS.phone}<a href="${PHONE_HREF}">${PHONE}</a></div>
+              <div class="f-contact">${ICONS.pin}<span>${ADDRESS}</span></div>
+            </div>
             <div class="footer-social">
               <a class="social-btn" href="https://www.facebook.com/ClarityRoofingFL/" target="_blank" rel="noopener" aria-label="Facebook">${ICONS.fb}</a>
               <a class="social-btn" href="https://www.instagram.com/clarityroofingfl/" target="_blank" rel="noopener" aria-label="Instagram">${ICONS.ig}</a>
+              <a class="social-btn" href="https://twitter.com/Clarity_Roofing" target="_blank" rel="noopener" aria-label="Twitter">${ICONS.tw}</a>
               <a class="social-btn" href="https://www.linkedin.com/company/clarity-roofing-solutions/" target="_blank" rel="noopener" aria-label="LinkedIn">${ICONS.li}</a>
-            </div>
-          </div>
-          <div class="footer-col">
-            <h5>Services</h5>
-            <ul>
-              ${SERVICES.map(s=>`<li><a href="${s.href}">${s.label}</a></li>`).join('')}
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h5>Company</h5>
-            <ul>
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="residential.html">Residential</a></li>
-              <li><a href="gallery.html">Clarity College</a></li>
-              <li><a href="contact.html">Contact Us</a></li>
-              <li><a href="contact.html">Free Estimate</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h5>Get In Touch</h5>
-            <div class="footer-contact-info">
-              <div class="f-contact">${ICONS.phone}<a href="${PHONE_HREF}">${PHONE}</a></div>
-              <div class="f-contact">${ICONS.mail}<a href="${EMAIL_HREF}">${EMAIL}</a></div>
-              <div class="f-contact">${ICONS.pin}<span>${ADDRESS}</span></div>
             </div>
           </div>
         </div>
         <div class="footer-bottom">
-          <p>Copyright &copy; ${yr} Clarity Roofing Solutions. All rights reserved.</p>
+          <p>Copyright &copy; ${yr}, All rights reserved</p>
           <div class="footer-legal">
+            <a href="https://www.thatskrispy.com" target="_blank" rel="noopener">@ThatsKrispy</a>
             <a href="privacy-policy.html">Privacy Policy</a>
             <a href="terms.html">Terms of Service</a>
-            <a href="https://www.thatskrispy.com" target="_blank" rel="noopener">@ThatsKrispy</a>
           </div>
         </div>
       </div>
     </footer>`;
+
+  const nl = document.getElementById('newsletter-form');
+  if (nl) {
+    nl.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const btn = nl.querySelector('button');
+      const orig = btn.textContent;
+      mailtoCompose(nl, 'Newsletter Signup — ClarityRoofingFL.com');
+      btn.textContent = 'Opening your email app…';
+      setTimeout(() => { btn.textContent = orig; }, 4000);
+    });
+  }
+
+  renderConsent();
 }
 
 // Contact form — opens the visitor's email client pre-filled with their message
@@ -284,12 +294,70 @@ function initContactForm(formId) {
   if (!form) return;
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const btn = form.querySelector('.form-submit');
+    const btn = form.querySelector('.form-submit') || form.querySelector('button[type="submit"]');
     const orig = btn.textContent;
     mailtoCompose(form);
     btn.textContent = 'Opening your email app…';
     setTimeout(() => { btn.textContent = orig; }, 4000);
   });
+}
+
+// ── Testimonial carousel — one at a time, dots, autoplay 5s, pause on hover (live behavior) ──
+function initTestiCarousel() {
+  const wrap = document.getElementById('testi-slides');
+  if (!wrap) return;
+  const slides = wrap.querySelectorAll('.testi-slide');
+  const nav = document.querySelector('.testi-nav');
+  let idx = 0, timer = null;
+
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'testi-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Show testimonial ${i + 1}`);
+    dot.addEventListener('click', () => { show(i); restart(); });
+    nav.appendChild(dot);
+  });
+  const dots = nav.querySelectorAll('.testi-dot');
+
+  function show(i) {
+    idx = i;
+    slides.forEach((s, j) => s.classList.toggle('active', j === i));
+    dots.forEach((d, j) => d.classList.toggle('active', j === i));
+  }
+  function next() { show((idx + 1) % slides.length); }
+  function restart() { clearInterval(timer); timer = setInterval(next, 5000); }
+  restart();
+
+  const card = wrap.closest('.testimonials-content');
+  card.addEventListener('mouseenter', () => clearInterval(timer));
+  card.addEventListener('mouseleave', restart);
+}
+
+// ── Cookie consent (self-contained; mirrors the live site's banner) ──
+function renderConsent() {
+  if (document.querySelector('.consent-banner')) return;
+  const KEY = 'crf-consent';
+  let saved = null;
+  try { saved = localStorage.getItem(KEY); } catch {}
+  const banner = document.createElement('div');
+  banner.className = 'consent-banner';
+  banner.setAttribute('role', 'dialog');
+  banner.setAttribute('aria-label', 'Cookie consent');
+  banner.innerHTML = `
+    <h4>Cookie Consent</h4>
+    <p>We use cookies to improve your experience on our site. By using our site, you consent to cookies. See our <a href="privacy-policy.html" style="color:var(--navy);font-weight:600;">Privacy Policy</a>.</p>
+    <div class="consent-actions">
+      <button class="btn consent-reject" data-consent="rejected">Reject</button>
+      <button class="btn btn-primary" data-consent="accepted">Accept All</button>
+    </div>`;
+  banner.addEventListener('click', (e) => {
+    const b = e.target.closest('[data-consent]');
+    if (!b) return;
+    try { localStorage.setItem(KEY, b.dataset.consent); } catch {}
+    banner.classList.remove('show');
+  });
+  document.body.appendChild(banner);
+  if (!saved) setTimeout(() => banner.classList.add('show'), 800);
 }
 
 // Scroll animation
