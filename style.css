@@ -309,13 +309,13 @@ p  { font-size: 16px; }
   box-shadow: var(--shadow-card);
   padding: 32px;
   display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  text-align: left;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 .hero-card-icon {
-  flex-shrink: 0;
   width: 50px; height: 50px;
+  margin-bottom: 14px;
   display: flex; align-items: center; justify-content: center;
 }
 .hero-card-icon svg { width: 44px; height: 44px; color: var(--navy); }
@@ -942,10 +942,11 @@ details .faq-body { padding: 28px; background: var(--off-white); font-size: 16px
   .consent-banner { left: 12px; right: 12px; bottom: 12px; max-width: none; }
 }
 
-/* ── Page Hero (inner pages) ── */
+/* ── Page Hero (inner pages) — live style: light band, photo fading in from
+      the right under a white gradient, navy Mulish h1 + gray subtitle ── */
 .page-hero {
-  background: var(--grad-dark);
-  padding: 72px 0 56px;
+  background: var(--off-white);
+  padding: 88px 0 72px;
   position: relative;
   overflow: hidden;
 }
@@ -953,19 +954,24 @@ details .faq-body { padding: 28px; background: var(--off-white); font-size: 16px
   position: absolute; inset: 0;
   background-size: cover;
   background-position: center;
-  opacity: 0.12;
+  opacity: 0.45;
+}
+.page-hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, var(--off-white) 30%, rgba(242,246,249,0.85) 55%, rgba(242,246,249,0.35) 100%);
 }
 .page-hero .container { position: relative; z-index: 2; }
 .breadcrumb {
   display: flex; align-items: center; gap: 8px;
-  font-size: 13px; color: rgba(255,255,255,0.5);
+  font-size: 13px; color: var(--gray);
   margin-bottom: 20px;
 }
-.breadcrumb a { color: rgba(255,255,255,0.65); }
-.breadcrumb a:hover { color: var(--white); }
-.page-hero .eyebrow { color: var(--muted); }
-.page-hero h1 { color: var(--white); margin-bottom: 14px; font-size: 54px; letter-spacing: -1.5px; }
-.page-hero p  { color: var(--muted); font-size: 16px; max-width: 620px; }
+.breadcrumb a { color: var(--navy); }
+.breadcrumb a:hover { color: var(--navy-dark); }
+.page-hero .eyebrow { color: var(--navy); }
+.page-hero h1 { color: var(--navy); margin-bottom: 14px; font-size: 54px; letter-spacing: -1.5px; }
+.page-hero p  { color: var(--body-txt); font-size: 18px; font-family: var(--font-display); font-weight: 600; max-width: 620px; }
 @media (max-width: 1024px) { .page-hero h1 { font-size: 40px; } }
 @media (max-width: 767px)  { .page-hero h1 { font-size: 32px; } }
 
@@ -1116,10 +1122,106 @@ details .faq-body { padding: 28px; background: var(--off-white); font-size: 16px
 .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
 .gallery-item:hover img { transform: scale(1.05); }
 
+/* ── Texture statement band (live "We Bring Clarity" style):
+      dark blue gradient + steel-frame photo, centered white copy ── */
+.texture-band {
+  position: relative;
+  background: var(--grad-dark);
+  padding: 96px 0;
+  overflow: hidden;
+}
+.texture-band::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('images/clarity-bg-texture.jpg') center/cover no-repeat;
+  opacity: 0.18;
+}
+.texture-band .container { position: relative; max-width: 1100px; text-align: center; }
+.texture-band h2 { color: var(--white); margin-bottom: 18px; }
+.texture-band p  { color: var(--muted); }
+.texture-band p + p { margin-top: 12px; }
+
+/* ── Zig-zag value rows (live About layout): heading column beside a
+      stack of white icon cards ── */
+.zig-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+.zig-row + .zig-row { margin-top: 72px; }
+.zig-head .eyebrow { margin-bottom: 8px; }
+.zig-head h2 { margin-bottom: 14px; }
+.zig-head p { color: var(--body-txt); }
+.ibox-stack { display: flex; flex-direction: column; gap: 16px; }
+.ibox {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: 24px 28px;
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+.ibox-icon { flex-shrink: 0; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; }
+.ibox-icon svg { width: 38px; height: 38px; color: var(--navy); }
+.ibox h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 6px; }
+.ibox p { color: var(--body-txt); font-size: 14px; line-height: 1.6; }
+@media (max-width: 1024px) {
+  .zig-row { grid-template-columns: 1fr; gap: 32px; }
+  .zig-row + .zig-row { margin-top: 48px; }
+  .zig-row .zig-head { order: -1; }
+}
+
+/* ── Statement section (live teamwork h5 pair) ── */
+.statement-block { max-width: 900px; margin: 0 auto; text-align: center; }
+.statement-block h5 { font-size: 22px; line-height: 1.45; letter-spacing: -0.25px; }
+.statement-block h5 + h5 { margin-top: 24px; }
+@media (max-width: 767px) { .statement-block h5 { font-size: 17px; } }
+
 /* ── Fade-in animation ── */
 @media (prefers-reduced-motion: no-preference) {
-  .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.55s, transform 0.55s; }
+  html.js .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.55s, transform 0.55s; }
   .fade-up.visible { opacity: 1; transform: none; }
+
+  /* Elementor-style entrance animations (live parity). Elements carry
+     data-anim + optional data-delay; initFade adds .animated in view. */
+  html.js [data-anim] { opacity: 0; }
+  [data-anim].animated {
+    opacity: 1;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+  }
+  [data-anim="fadeInLeft"].animated  { animation-name: a-fadeInLeft; }
+  [data-anim="fadeInRight"].animated { animation-name: a-fadeInRight; }
+  [data-anim="fadeInUp"].animated    { animation-name: a-fadeInUp; }
+  [data-anim="fadeIn"].animated      { animation-name: a-fadeIn; }
+  [data-anim="zoomIn"].animated      { animation-name: a-zoomIn; }
+  [data-anim="bounceInUp"].animated  { animation-name: a-bounceInUp; }
+  [data-anim="bounceInLeft"].animated{ animation-name: a-bounceInLeft; }
+}
+@keyframes a-fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes a-fadeInLeft { from { opacity: 0; transform: translate3d(-60px,0,0); } to { opacity: 1; transform: none; } }
+@keyframes a-fadeInRight { from { opacity: 0; transform: translate3d(60px,0,0); } to { opacity: 1; transform: none; } }
+@keyframes a-fadeInUp { from { opacity: 0; transform: translate3d(0,50px,0); } to { opacity: 1; transform: none; } }
+@keyframes a-zoomIn {
+  from { opacity: 0; transform: scale3d(0.55,0.55,0.55); }
+  50% { opacity: 1; }
+  to { opacity: 1; transform: none; }
+}
+@keyframes a-bounceInUp {
+  0% { opacity: 0; transform: translate3d(0,140px,0); }
+  60% { opacity: 1; transform: translate3d(0,-14px,0); }
+  75% { transform: translate3d(0,6px,0); }
+  90% { transform: translate3d(0,-3px,0); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes a-bounceInLeft {
+  0% { opacity: 0; transform: translate3d(-140px,0,0); }
+  60% { opacity: 1; transform: translate3d(14px,0,0); }
+  75% { transform: translate3d(-6px,0,0); }
+  90% { transform: translate3d(3px,0,0); }
+  100% { opacity: 1; transform: none; }
 }
 
 /* ── Responsive ── */

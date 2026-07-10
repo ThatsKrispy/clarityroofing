@@ -1,6 +1,8 @@
 // Clarity Roofing Florida — clarityroofingfl.com
 // Shared components: header, footer, form, scroll animations
 
+document.documentElement.classList.add('js');
+
 // ── ADA / Accessibility Widget (self-contained, no third-party account) ──
 // Renders a bottom-anchored button + panel. Preferences persist across pages via localStorage.
 function renderA11y() {
@@ -360,12 +362,24 @@ function renderConsent() {
   if (!saved) setTimeout(() => banner.classList.add('show'), 800);
 }
 
-// Scroll animation
+// Scroll animations — .fade-up (subtle) and [data-anim] Elementor-style
+// entrances (fadeInLeft/Right/Up, zoomIn, bounceInUp…) with data-delay ms.
 function initFade() {
-  const els = document.querySelectorAll('.fade-up');
+  const els = document.querySelectorAll('.fade-up, [data-anim]');
   if (!els.length) return;
   const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target;
+      if (el.hasAttribute('data-anim')) {
+        const delay = parseInt(el.dataset.delay || '0', 10);
+        if (delay) el.style.animationDelay = delay + 'ms';
+        el.classList.add('animated');
+      } else {
+        el.classList.add('visible');
+      }
+      io.unobserve(el);
+    });
   }, { threshold: 0.1 });
   els.forEach(el => io.observe(el));
 }
