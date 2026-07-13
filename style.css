@@ -1182,12 +1182,12 @@ details .faq-body { padding: 28px; background: var(--off-white); font-size: 16px
 /* ── Fade-in animation ── */
 @media (prefers-reduced-motion: no-preference) {
   html.js .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.55s, transform 0.55s; }
-  .fade-up.visible { opacity: 1; transform: none; }
+  html.js .fade-up.visible { opacity: 1; transform: none; }
 
   /* Elementor-style entrance animations (live parity). Elements carry
      data-anim + optional data-delay; initFade adds .animated in view. */
   html.js [data-anim] { opacity: 0; }
-  [data-anim].animated {
+  html.js [data-anim].animated {
     opacity: 1;
     animation-duration: 1s;
     animation-fill-mode: both;
